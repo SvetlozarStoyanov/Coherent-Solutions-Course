@@ -13,32 +13,27 @@
 
         private int[] FillArrayWithUniqueElements(int[] inputArray)
         {
-            var array = new int[1] { inputArray[0] };
-            for (int i = 1; i < inputArray.Length; i++)
+            var resultArray = new int[inputArray.Length];
+            var reachedIndex = 0;
+            for (int i = 0; i < inputArray.Length; i++)
             {
-                if (!ContainsElement(inputArray[i], array))
+                if (!ContainsElement(inputArray[i], reachedIndex, resultArray))
                 {
-                    array = AppendElementToArray(inputArray[i], array);
+                    AppendElementToArray(inputArray[i], reachedIndex++, resultArray);
                 }
             }
-            return array;
+            resultArray = TruncateArray(reachedIndex, resultArray);
+            return resultArray;
         }
 
-        private int[] AppendElementToArray(int newElement, int[] array)
+        private void AppendElementToArray(int newElement, int index, int[] array)
         {
-            var temp = array;
-            array = new int[array.Length + 1];
-            for (int i = 0; i < array.Length - 1; i++)
-            {
-                array[i] = temp[i];
-            }
-            array[array.Length - 1] = newElement;
-            return array;
+            array[index] = newElement;
         }
 
-        private bool ContainsElement(int element, int[] array)
+        private bool ContainsElement(int element, int index, int[] array)
         {
-            for (int i = 0; i < array.Length; i++)
+            for (int i = 0; i < index; i++)
             {
                 if (array[i] == element)
                 {
@@ -46,6 +41,16 @@
                 }
             }
             return false;
+        }
+
+        private int[] TruncateArray(int endIndex, int[] inputArray)
+        {
+            var resultArray = new int[endIndex];
+            for (int i = 0; i < endIndex; i++)
+            {
+                resultArray[i] = inputArray[i];
+            }
+            return resultArray;
         }
     }
 }
