@@ -1,4 +1,6 @@
-﻿namespace Homework_1
+﻿using System.Text;
+
+namespace Homework_1
 {
     internal class DuodecimalFinder
     {
@@ -8,51 +10,45 @@
         }
 
         public string GetNumbersWhichContainSubstring(int num01,
-            int num02,
-            string substring = "AA")
+            int num02)
         {
             return string.Join(", ", FindNumbersWhichContainSubstring(num01,
-                num02,
-                substring));
+                num02));
         }
 
-        private List<int> FindNumbersWhichContainSubstring(int num01,
-            int num02,
-            string substring)
+        private string FindNumbersWhichContainSubstring(int num01,
+            int num02)
         {
-            var numbersWhichMatchCondition = new List<int>();
-            if (num01 < num02)
+            var sb = new StringBuilder();
+            var max = Math.Max(num01, num02);
+            var min = Math.Min(num01, num02);
+            for (int i = min; i <= max; i++)
             {
-                for (int i = num01; i <= num02; i++)
+                if (ContainsTwoAs(i))
                 {
-                    if (ConvertToDuodecimal(i).Contains(substring))
-                    {
-                        numbersWhichMatchCondition.Add(i);
-                    }
+                    sb.Append($"{i}, ");
                 }
             }
-            return numbersWhichMatchCondition;
+            return sb.Remove(sb.Length - 2, 2).ToString();
         }
 
-        private string ConvertToDuodecimal(int number)
+        private bool ContainsTwoAs(int number)
         {
-            string duodecimalChars = "0123456789AB";
-            string result = string.Empty;
-
-            if (number == 0)
-            {
-                return "0";
-            }
-
+            var remainderCount = 0;
             while (number > 0)
             {
-                int remainder = number % 12;
-
-                result = duodecimalChars[remainder] + result;
-
-                number /= 12;
+                var remainder = number % 12;
+                number = number / 12;
+                if (remainder == 10)
+                {
+                    remainderCount++;
+                }
+                if (remainderCount == 2)
+                {
+                    return true;
+                }
             }
-            return result;
+            return false;
         }
     }
 }
