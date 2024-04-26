@@ -18,13 +18,13 @@
             }
             checkDigit = checkDigit + checkDigit;
             checkDigit = checkDigit % 11;
-            if (checkDigit > 0)
+            if (checkDigit == 10)
             {
-                input += "-" + checkDigit;
+                input += "-X";
             }
             else
             {
-                input += "-X";
+                input += "-" + checkDigit;
             }
         }
     }
