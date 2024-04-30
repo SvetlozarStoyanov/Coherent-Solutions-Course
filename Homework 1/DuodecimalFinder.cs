@@ -12,13 +12,6 @@ namespace Homework_1
         public string GetNumbersWhichContainSubstring(int num01,
             int num02)
         {
-            return string.Join(", ", FindNumbersWhichContainSubstring(num01,
-                num02));
-        }
-
-        private string FindNumbersWhichContainSubstring(int num01,
-            int num02)
-        {
             var sb = new StringBuilder();
             var max = Math.Max(num01, num02);
             var min = Math.Min(num01, num02);
@@ -43,10 +36,10 @@ namespace Homework_1
                 {
                     remainderCount++;
                 }
-                if (remainderCount == 2)
-                {
-                    return true;
-                }
+            }
+            if (remainderCount == 2)
+            {
+                return true;
             }
             return false;
         }
