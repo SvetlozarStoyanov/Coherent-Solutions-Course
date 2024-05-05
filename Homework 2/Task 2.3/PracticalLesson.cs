@@ -1,6 +1,6 @@
 ﻿namespace Homework_2.Task_2._3
 {
-    public class PracticalLesson : ParentClass
+    public class PracticalLesson : SchoolOccupationBase
     {
         public PracticalLesson(string textDescription,string? taskCondition, string? solution) : base(textDescription)
         {

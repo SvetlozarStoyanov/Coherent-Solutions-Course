@@ -1,6 +1,6 @@
 ﻿namespace Homework_2.Task_2._3
 {
-    public class Lecture : ParentClass
+    public class Lecture : SchoolOccupationBase
     {
         public string? Topic { get; set; }
 
@@ -9,7 +9,7 @@
             Topic = topic;
         }
 
-        public override ParentClass Clone()
+        public override SchoolOccupationBase Clone()
         {
             return new Lecture(TextDescription, Topic);
         }
