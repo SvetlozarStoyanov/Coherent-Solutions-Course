@@ -45,7 +45,7 @@ namespace Homework_2
             var practicalLessonTwo = new PracticalLesson("Simple task to subtract Numbers", "Subtract 5 and 3", "2");
             var practicalLessonThree = new PracticalLesson("Simple task to multiply two Numbers", "Multiply 3 and 3", "9");
 
-            var allClasses = new HashSet<ParentClass>
+            var allClasses = new SchoolOccupationBase[]
             {
                 lectureOne,
                 lectureTwo,
@@ -54,13 +54,13 @@ namespace Homework_2
                 practicalLessonTwo,
                 practicalLessonThree
             };
-            var allLectures = new HashSet<ParentClass>
+            var allLectures = new SchoolOccupationBase[]
             {
                 lectureOne,
                 lectureTwo,
                 lectureThree,
             };
-            var allPracticalLessons = new HashSet<ParentClass>
+            var allPracticalLessons = new SchoolOccupationBase[]
             {
                 practicalLessonOne,
                 practicalLessonTwo,
