@@ -8,9 +8,9 @@ namespace Homework_2
         public DiagonalMatrix(params int[] items)
         {
             DiagonalItems = items;
-            Size = items != null ? items.Length : 0;
+
         }
-        public int Size { get; private set; }
+        public int Size { get => DiagonalItems != null ? DiagonalItems.Length : 0 ; }
         public int[] DiagonalItems { get => diagonalItems; private set => diagonalItems = value; }
 
         public int this[int i, int j]
