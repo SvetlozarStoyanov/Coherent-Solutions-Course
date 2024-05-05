@@ -1,15 +1,16 @@
-﻿namespace Homework_2.Task_2._3
+﻿
+namespace Homework_2.Task_2._3
 {
     public class Training
     {
-        private HashSet<ParentClass> classes;
-
+        private SchoolOccupationBase[] classes;
+        private int classesReachedIndex;
         public Training()
         {
-            classes = new HashSet<ParentClass>();
+            classes = new SchoolOccupationBase[0];
         }
 
-        public Training(string? textDescription, HashSet<ParentClass> classes) : this()
+        public Training(string? textDescription, SchoolOccupationBase[] classes) : this()
         {
             Classes = classes;
             TextDescription = textDescription;
@@ -17,7 +18,7 @@
 
         public string? TextDescription { get; set; }
 
-        public HashSet<ParentClass> Classes
+        public SchoolOccupationBase[] Classes
         {
             get { return classes; }
             private set { classes = value; }
@@ -25,12 +26,16 @@
 
         public bool IsPractical()
         {
-            if (Classes.Count == 0)
+            if (Classes.Length == 0)
             {
                 return false;
             }
             foreach (var classItem in Classes)
             {
+                if (classItem is null)
+                {
+                    return true;
+                }
                 if (classItem is Lecture)
                 {
                     return false;
@@ -39,9 +44,24 @@
             return true;
         }
 
-        public void Add(ParentClass classItem)
+        public void Add(SchoolOccupationBase classItem)
         {
-            Classes.Add(classItem);
+            if (classesReachedIndex >= Classes.Length)
+            {
+                ResizeClassesArray();
+            }
+            Classes[classesReachedIndex++] = classItem;
+        }
+
+        private void ResizeClassesArray()
+        {
+            var oldSize = Classes.Length == 0 ? 1 : Classes.Length; 
+            var result = new SchoolOccupationBase[oldSize * 2];
+            for (int i = 0; i < Classes.Length; i++)
+            {
+                result[i] = Classes[i];
+            }
+            Classes = result;
         }
 
         public Training Clone()
@@ -50,7 +70,11 @@
             clone.TextDescription = this.TextDescription;
             foreach (var classItem in Classes)
             {
-                clone.Classes.Add(classItem.Clone());
+                if (classItem == null)
+                {
+                    break;
+                }
+                clone.Add(classItem);
             }
             return clone;
         }
