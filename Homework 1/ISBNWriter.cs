@@ -16,8 +16,7 @@
                 // Subtracting is necessary because input[i] is a char and that adds an additional 48 to its value
                 checkDigit += (10 - i) * (input[i] - 48);
             }
-            checkDigit = checkDigit + checkDigit;
-            checkDigit = checkDigit % 11;
+            checkDigit = 11 - (checkDigit % 11) % 11;
             if (checkDigit == 10)
             {
                 input += "-X";
