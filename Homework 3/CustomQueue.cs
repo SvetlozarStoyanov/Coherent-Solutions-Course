@@ -2,13 +2,14 @@
 
 namespace Homework_3
 {
-    public class CustomQueue<T> : ICustomQueue<T>
+    public class CustomQueue<T>  : ICustomQueue<T> where T : struct
     {
         private LinkedList<T> linkedList;
         public CustomQueue()
         {
             linkedList = new LinkedList<T>();
-        }
+        }        
+
         public void Enqueue(T item)
         {
             linkedList.AddLast(item);
