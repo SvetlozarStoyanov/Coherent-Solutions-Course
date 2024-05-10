@@ -30,10 +30,10 @@ namespace Homework_3
             queue.Enqueue(1);
             queue.Enqueue(2);
             queue.Enqueue(3);
-            var newQueue = queue.Tail();
+            var newQueue = ICustomQueueExtention.Tail<int>(queue);
             while (!newQueue.IsEmpty())
             {
-                Console.WriteLine(queue.Dequeue());
+                Console.WriteLine(newQueue.Dequeue());
             }
         }
     }
