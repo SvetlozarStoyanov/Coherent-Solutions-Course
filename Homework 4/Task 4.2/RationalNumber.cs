@@ -39,6 +39,10 @@
 
         public static RationalNumber operator /(RationalNumber numberOne, RationalNumber numberTwo)
         {
+            if (numberTwo.Numerator == 0)
+            {
+                throw new DivideByZeroException("Cannot divide by zero!");
+            }
             var commonDenominator = numberOne.Denominator * numberTwo.Numerator;
             var resultNumerator = numberOne.Numerator * numberTwo.Denominator;
             return new RationalNumber(resultNumerator, commonDenominator);
