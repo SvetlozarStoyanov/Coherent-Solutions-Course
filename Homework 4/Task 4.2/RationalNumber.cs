@@ -4,9 +4,9 @@
     {
         public RationalNumber(int numerator, int denominator)
         {
-            if (denominator == 0)
+            if (denominator <= 0)
             {
-                throw new ArgumentException("Denominator cannot be zero!");
+                throw new ArgumentException("Denominator must be a natural number!");
             }
             Numerator = numerator;
             Denominator = denominator;
