@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+  <Books>
+    <Book>
+      <Title>Harry Potter One</Title>
+      <ISBN>1234567890123</ISBN>
+      <PublicationDate>1998-07-16T00:00:00</PublicationDate>
+      <Authors>
+        <Author>
+          <FirstName>J.K</FirstName>
+          <LastName>Rowling</LastName>
+          <DateOfBirth>16.5.1960 г.</DateOfBirth>
+        </Author>
+      </Authors>
+    </Book>
+    <Book>
+      <Title>Harry Potter One</Title>
+      <ISBN>1234567890122</ISBN>
+      <PublicationDate>1998-11-27T00:00:00</PublicationDate>
+      <Authors>
+        <Author>
+          <FirstName>J.K</FirstName>
+          <LastName>Rowling</LastName>
+          <DateOfBirth>16.5.1960 г.</DateOfBirth>
+        </Author>
+      </Authors>
+    </Book>
+    <Book>
+      <Title>A Song of Ice and Fire</Title>
+      <ISBN>1234562891122</ISBN>
+      <PublicationDate>1996-08-02T00:00:00</PublicationDate>
+      <Authors>
+        <Author>
+          <FirstName>George R.R</FirstName>
+          <LastName>Martin</LastName>
+          <DateOfBirth>12.3.1968 г.</DateOfBirth>
+        </Author>
+      </Authors>
+    </Book>
+    <Book>
+      <Title>Pod Igoto</Title>
+      <ISBN>1334562820122</ISBN>
+      <PublicationDate>1894-02-02T00:00:00</PublicationDate>
+      <Authors>
+        <Author>
+          <FirstName>Ivan</FirstName>
+          <LastName>Vazov</LastName>
+          <DateOfBirth>9.7.1850 г.</DateOfBirth>
+        </Author>
+      </Authors>
+    </Book>
+    <Book>
+      <Title>Chichovci</Title>
+      <ISBN>1384562820122</ISBN>
+      <PublicationDate>1885-02-03T00:00:00</PublicationDate>
+      <Authors>
+        <Author>
+          <FirstName>Ivan</FirstName>
+          <LastName>Vazov</LastName>
+          <DateOfBirth>9.7.1850 г.</DateOfBirth>
+        </Author>
+      </Authors>
+    </Book>
+    <Book>
+      <Title>The Monarchs</Title>
+      <ISBN>1234567890332</ISBN>
+      <PublicationDate>2022-01-11T00:00:00</PublicationDate>
+      <Authors>
+        <Author>
+          <FirstName>Kass</FirstName>
+          <LastName>Morgan</LastName>
+          <DateOfBirth>9.7.1850 г.</DateOfBirth>
+        </Author>
+        <Author>
+          <FirstName>Danielle</FirstName>
+          <LastName>Page</LastName>
+          <DateOfBirth>9.7.1850 г.</DateOfBirth>
+        </Author>
+      </Authors>
+    </Book>
+  </Books>
+</Catalog>
