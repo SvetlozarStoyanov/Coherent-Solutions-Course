@@ -1,4 +1,6 @@
 ﻿using Homework_6.Contracts;
+using Homework_6.ViewModels;
+using System.Text.Json.Serialization;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
@@ -17,6 +19,8 @@ namespace Homework_6.Models
             books = new Dictionary<string, Book>();
         }
 
+        [JsonPropertyName("Books")]
+        public Dictionary<string, Book> Books { get => books; }
         public void AddBook(Book book)
         {
             var filteredISBN = book.ISBN.Replace("-", string.Empty);
@@ -49,7 +53,7 @@ namespace Homework_6.Models
                 .ToHashSet();
         }
 
-        public HashSet<Tuple<string, int>> AuthorAndBookCount()
+        public HashSet<Tuple<string, int>> AuthorsAndBookCount()
         {
             var authors = new Dictionary<string, int>();
             foreach (var book in books)
@@ -66,6 +70,34 @@ namespace Homework_6.Models
             return authors
                 .Select(a => new Tuple<string, int>(a.Key, a.Value))
                 .ToHashSet();
+        }
+
+        public HashSet<AuthorViewModel> AuthorsAndBooks()
+        {
+            var authorsAndBooks = new Dictionary<Author, HashSet<Book>>();
+            foreach (var book in books)
+            {
+                foreach (var author in book.Value.Authors)
+                {
+                    if (!authorsAndBooks.ContainsKey(author))
+                    {
+                        authorsAndBooks[author] = new HashSet<Book>();
+                    }
+                    authorsAndBooks[author].Add(book.Value);
+                }
+            }
+            return authorsAndBooks.Select(kvp => new AuthorViewModel()
+            {
+                FirstName = kvp.Key.FirstName,
+                LastName = kvp.Key.LastName,
+                DateOfBirth = kvp.Key.DateOfBirth,
+                Books = kvp.Value.Select(b => new BookViewModel()
+                {
+                    Title = b.Title,
+                    ISBN = b.ISBN,
+                    PublicationDate = b.PublicationDate
+                }).ToHashSet()
+            }).ToHashSet();
         }
 
         public XElement SerializeToXml()

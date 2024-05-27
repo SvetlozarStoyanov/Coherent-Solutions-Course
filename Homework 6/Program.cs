@@ -1,6 +1,8 @@
 ﻿using Homework_6.Models;
 using Homework_6.Services;
 using Homework_6.ViewModels;
+using Newtonsoft.Json;
+using System.Text;
 using System.Xml.Linq;
 
 namespace Homework_6
@@ -23,7 +25,7 @@ namespace Homework_6
                 {
                     authors[0]
                 }),
-                new Book("Harry Potter One","1234567890122",new DateTime(1998,11,27),new HashSet<Author>()
+                new Book("Harry Potter Two","1234567890122",new DateTime(1998,11,27),new HashSet<Author>()
                 {
                     authors[0]
                 }),
@@ -50,13 +52,49 @@ namespace Homework_6
             {
                 catalog.AddBook(book);
             }
-            var filePath = "../../../Serialized XML/test";
-            Console.WriteLine(catalog.SerializeToXml().ToString());
+            var xmlDirectory = "../../../Serialized XML/";
+            CreateDirectory(xmlDirectory);
+            var xmlFilePath = xmlDirectory + "catalog.xml";
             var xmlRepository = new XMLRepository<XElement>();
             var catalogXml = catalog.SerializeToXml();
-            xmlRepository.WriteToFile(catalogXml, filePath);
-            var catalogParsed = xmlRepository.DeserializeToObject<CatalogViewModel>(filePath);
+            xmlRepository.WriteToFile(catalogXml, xmlFilePath);
+            var catalogParsed = xmlRepository.DeserializeToObject<CatalogViewModel>(xmlFilePath);
             Console.WriteLine();
+
+            var jsonFilePath = "../../../Serialized JSON/";
+            CreateDirectory(jsonFilePath);
+            var jsonRepository = new JSONRepository<AuthorViewModel>();
+            var authorsAndBooks = catalog.AuthorsAndBooks();
+            foreach (var item in authorsAndBooks)
+            {
+                var path = jsonFilePath + $"{(item.FirstName + " " + item.LastName).Trim()}.json";
+                jsonRepository.WriteToFile(item, path);
+            }
+            var jsonFiles = GetFilesFromDirectory(jsonFilePath);
+            var authorsAndBooksDeserialized = new HashSet<AuthorViewModel>();
+            foreach (var item in jsonFiles)
+            {
+                var deserialized = jsonRepository.DeserializeToObject<AuthorViewModel>(item);
+                authorsAndBooksDeserialized.Add(deserialized);
+            }
+            Console.WriteLine();
+        }
+
+        private static void CreateDirectory(string path)
+        {
+            bool directoryExists = Directory.Exists(path);
+            if (directoryExists)
+            {
+                Directory.Delete(path, true);
+            }
+
+            Directory.CreateDirectory(path);
+        }
+
+        private static string[] GetFilesFromDirectory(string path)
+        {
+            var files = Directory.GetFiles(path);
+            return files;
         }
     }
 }

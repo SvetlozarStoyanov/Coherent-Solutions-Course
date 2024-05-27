@@ -1,4 +1,5 @@
 ﻿using Homework_6.Contracts;
+using Newtonsoft.Json;
 using System.Diagnostics.CodeAnalysis;
 using System.Xml.Linq;
 using System.Xml.Serialization;
@@ -57,6 +58,7 @@ namespace Homework_6.Models
         public DateOnly DateOfBirth { get; set; }
 
         [XmlIgnore]
+        [JsonIgnore]
         public string FullName => $"{FirstName} + {LastName}";
 
         public XElement SerializeToXml()
