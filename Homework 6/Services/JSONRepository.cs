@@ -4,10 +4,9 @@ using System.Text;
 
 namespace Homework_6.Services
 {
-    internal class JSONRepository<T> : IRepository<T>
+    public class JSONRepository : IRepository
     {
-
-        public void WriteToFile(T obj, string path)
+        public void WriteToFile<T>(T obj, string path)
         {
             var serializer = new JsonSerializer();
             var streamWriter = new StreamWriter(path, false, Encoding.UTF8);

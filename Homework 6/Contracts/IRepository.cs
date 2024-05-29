@@ -1,8 +1,8 @@
 ﻿namespace Homework_6.Contracts
 {
-    public interface IRepository<T>
+    public interface IRepository
     {
-        void WriteToFile(T obj, string path);
+        void WriteToFile<T>(T obj, string path);
 
         T DeserializeToObject<T>(string path);
     }

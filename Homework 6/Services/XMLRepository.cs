@@ -6,9 +6,9 @@ using System.Xml.Serialization;
 
 namespace Homework_6.Services
 {
-    public class XMLRepository<T> : IRepository<T> where T : XElement
+    public class XMLRepository : IRepository
     {
-        public void WriteToFile(T obj, string path)
+        public void WriteToFile<T>(T obj, string path)
         {
             var xmlSerializer = new XmlSerializer(typeof(T));
             var streamWriter = new StreamWriter(path, false, Encoding.UTF8);
