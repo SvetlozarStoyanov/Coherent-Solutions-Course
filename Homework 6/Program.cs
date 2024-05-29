@@ -55,7 +55,7 @@ namespace Homework_6
             var xmlDirectory = "../../../Serialized XML/";
             CreateDirectory(xmlDirectory);
             var xmlFilePath = xmlDirectory + "catalog.xml";
-            var xmlRepository = new XMLRepository<XElement>();
+            var xmlRepository = new XMLRepository();
             var catalogXml = catalog.SerializeToXml();
             xmlRepository.WriteToFile(catalogXml, xmlFilePath);
             var catalogParsed = xmlRepository.DeserializeToObject<CatalogViewModel>(xmlFilePath);
@@ -63,7 +63,7 @@ namespace Homework_6
 
             var jsonFilePath = "../../../Serialized JSON/";
             CreateDirectory(jsonFilePath);
-            var jsonRepository = new JSONRepository<AuthorViewModel>();
+            var jsonRepository = new JSONRepository();
             var authorsAndBooks = catalog.AuthorsAndBooks();
             foreach (var item in authorsAndBooks)
             {
