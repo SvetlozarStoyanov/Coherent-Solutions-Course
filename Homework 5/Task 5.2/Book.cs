@@ -9,8 +9,7 @@ namespace Homework_5.Task_5._2
         private string isbn;
         private DateTime? publicationDate;
         private HashSet<string> authors;
-        private Regex regexWithHyphons = new Regex(@"[0-9]{3}[-][0-9]{1}[-][0-9]{2}[-][0-9]{6}[-][0-9]{1}");
-        private Regex regexNoHyphons = new Regex(@"[0-9]{13}");
+        private Regex regex = new Regex(@"[0-9]{13}");
 
         [SetsRequiredMembers]
         public Book(string title,
@@ -45,13 +44,12 @@ namespace Homework_5.Task_5._2
             get => isbn;
             set
             {
+                value = value.Replace("-", string.Empty);
                 if (string.IsNullOrEmpty(value))
                 {
                     throw new ArgumentNullException("ISBN is required!");
                 }
-                if ((!regexWithHyphons.IsMatch(value)
-                     && !regexNoHyphons.IsMatch(value))
-                    )
+                if (!regex.IsMatch(value))
                 {
                     throw new ArgumentException("ISBN is invalid");
                 }
