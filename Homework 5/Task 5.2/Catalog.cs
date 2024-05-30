@@ -43,30 +43,12 @@
 
         public HashSet<Tuple<string, int>> AuthorAndBookCount()
         {
-            var authors = new Dictionary<string, int>();
-            foreach (var book in books)
-            {
-                foreach (var author in book.Value.Authors)
-                {
-                    if (!authors.ContainsKey(author))
-                    {
-                        authors[author] = 0;
-                    }
-                    authors[author]++;
-                }
-
-            }
-            return authors
-                .Select(a => new Tuple<string, int>(a.Key, a.Value))
+            return books
+                .SelectMany(book => book.Value.Authors)
+                .GroupBy(author => author)
+                .Select(group => new Tuple<string, int>(group.Key, group.Count()))
                 .ToHashSet();
         }
 
-
-
-        //private HashSet<string> GetUniqueAuthors()
-        //{
-
-        //    return authors;
-        //}
     }
 }
