@@ -47,7 +47,7 @@ namespace Homework_5.Task_5._1
 
         private readonly int rows;
         private readonly int columns;
-        private long[] cornerElements;
+        private Dictionary<(int, int), long> elements;
 
         public SparseMatrix(int rows, int columns)
         {
@@ -57,28 +57,29 @@ namespace Homework_5.Task_5._1
             }
             this.rows = rows;
             this.columns = columns;
-            cornerElements = new long[4];
+            elements = new Dictionary<(int, int), long>();
         }
 
         public long this[int row, int column]
         {
             get
             {
-                if (IsCornerElement(row, column))
+                if (elements.ContainsKey((row, column)))
                 {
-                    var cornerIndex = GetCornerIndex(row, column);
-
-                    return cornerElements[cornerIndex];
+                    return elements[(row, column)];
                 }
+
                 return 0L;
             }
             set
             {
-                if (IsCornerElement(row, column))
+                if (value == 0)
                 {
-                    var cornerIndex = GetCornerIndex(row, column);
-
-                    cornerElements[cornerIndex] = value;
+                    elements.Remove((row, column));
+                }
+                else
+                {
+                    elements[(row, column)] = value;
                 }
             }
         }
@@ -114,7 +115,7 @@ namespace Homework_5.Task_5._1
             {
                 for (int row = 0; row < this.GetLength(0); row++)
                 {
-                    if (this[row,col] != 0)
+                    if (this[row, col] != 0)
                     {
                         resultList.Add(new(row, col, this[row, col]));
                     }
@@ -128,46 +129,14 @@ namespace Homework_5.Task_5._1
             var count = 0;
             if (element == 0)
             {
-                return GetLength(0) * GetLength(1) - 4;
+                return GetLength(0) * GetLength(1) - elements.Count;
             }
             else
             {
-                for (int i = 0; i < cornerElements.Length; i++)
-                {
-                    if (cornerElements[i] == element)
-                    {
-                        count++;
-                    }
-                }
-                return count;
+                return elements.Count(e => e.Value == element);
             }
         }
 
-        private bool IsCornerElement(int row, int column)
-        {
-            if ((row == 0 || row == rows - 1) && (column == 0 || column == columns - 1))
-            {
-                return true;
-            }
-            return false;
-        }
-
-        private int GetCornerIndex(int row, int column)
-        {
-            if (row == 0 && column == 0)
-            {
-                return 0;
-            }
-            if (row == 0 && column == columns - 1)
-            {
-                return 1;
-            }
-            if (row == rows - 1 && column == 0)
-            {
-                return 2;
-            }
-            return 3;
-        }
 
         public override string ToString()
         {
